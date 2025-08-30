@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bleatingsheep.Osu.ApiClient" Version="0.6.21" />
+<!--    <PackageReference Include="Bleatingsheep.Osu.ApiClient" Version="0.6.21" />-->
     <PackageReference Include="PuppeteerSharp" Version="20.2.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bleatingsheep.Osu.ApiClient\Bleatingsheep.Osu.ApiClient\Bleatingsheep.Osu.ApiClient.csproj"/>
+    <ProjectReference Include="..\Bleatingsheep.Osu.Enums\Bleatingsheep.Osu.Enums\Bleatingsheep.Osu.Enums.csproj"/>
     <ProjectReference Include="..\Bleatingsheep.NewHydrant\Bleatingsheep.NewHydrant.csproj" />
     <ProjectReference Include="..\Bleatingsheep.OsuApiClient\Bleatingsheep.OsuMixedApi.csproj" />
     <ProjectReference Include="..\Bleatingsheep.NewHydrant.Data\Bleatingsheep.NewHydrant.Data.csproj" />

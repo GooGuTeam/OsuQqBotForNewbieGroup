@@ -1,18 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Bleatingsheep.Osu.ApiClient" Version="0.6.21" />
-    <PackageReference Include="Polly" Version="8.6.2" />
-  </ItemGroup>
+    <ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Bleatingsheep.OsuQqBot.Database\Bleatingsheep.OsuQqBot.Database.csproj" />
-  </ItemGroup>
+        <PackageReference Include="Polly" Version="8.6.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Bleatingsheep.Osu.ApiClient\Bleatingsheep.Osu.ApiClient\Bleatingsheep.Osu.ApiClient.csproj"/>
+        <ProjectReference Include="..\Bleatingsheep.OsuQqBot.Database\Bleatingsheep.OsuQqBot.Database.csproj"/>
+        <ProjectReference Include="..\Bleatingsheep.Osu.Enums\Bleatingsheep.Osu.Enums\Bleatingsheep.Osu.Enums.csproj"/>
+    </ItemGroup>
 
 </Project>

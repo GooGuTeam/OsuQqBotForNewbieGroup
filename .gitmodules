@@ -1,0 +1,6 @@
+[submodule "Bleatingsheep.Osu.ApiClient"]
+	path = Bleatingsheep.Osu.ApiClient
+	url = https://github.com/GooGuTeam/Bleatingsheep.Osu.ApiClient.git
+[submodule "Bleatingsheep.Osu.Enums"]
+	path = Bleatingsheep.Osu.Enums
+	url = https://github.com/GooGuTeam/Bleatingsheep.Osu.Enums.git

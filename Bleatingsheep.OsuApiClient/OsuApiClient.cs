@@ -9,19 +9,25 @@ namespace Bleatingsheep.OsuMixedApi
     public class OsuApiClient
     {
         #region Static
+
         internal static readonly TimeSpan TimeZone = new TimeSpan(8, 0, 0);
+
         #endregion
 
         #region Addresses
-        private static readonly string Root = "https://osu.ppy.sh";
-        private static string BeatmapUrl => Root + "/api/get_beatmaps";
-        private static string RecentlyPlayedUrl => Root + "/api/get_user_recent";
-        private static string BestPerformanceUrl => Root + "/api/get_user_best";
-        private static string UserUrl => Root + "/api/get_user";
+
+        private static readonly string Root = "https://lazer-api.g0v0.top";
+        private static string BeatmapUrl => Root + "/api/v1/get_beatmaps";
+        private static string RecentlyPlayedUrl => Root + "/api/v1/get_user_recent";
+        private static string BestPerformanceUrl => Root + "/api/v1/get_user_best";
+        private static string UserUrl => Root + "/api/v1/get_user";
+
         #endregion
 
         #region Limits
+
         private static readonly Dictionary<string, OsuApiClient> clients = new Dictionary<string, OsuApiClient>();
+
         public static OsuApiClient ClientUsingKey(string apiKey)
         {
             lock (clients)
@@ -33,17 +39,22 @@ namespace Bleatingsheep.OsuMixedApi
                 return client;
             }
         }
+
         #endregion
 
         #region ctor and readonly vars
+
         private readonly string apiKey;
+
         private OsuApiClient(string apiKey)
         {
             this.apiKey = apiKey;
         }
+
         #endregion
 
         #region API
+
         /// <summary>
         /// 通过 BID 查找图。
         /// </summary>
@@ -61,7 +72,8 @@ namespace Bleatingsheep.OsuMixedApi
             return await GetBeatmapAsync(md5String);
         }
 
-        public async Task<Beatmap[]> GetBeatmapAsync(string md5) => await SafeGetArrayAsync<Beatmap>(BeatmapUrl, ("k", apiKey), ("h", md5));
+        public async Task<Beatmap[]> GetBeatmapAsync(string md5) =>
+            await SafeGetArrayAsync<Beatmap>(BeatmapUrl, ("k", apiKey), ("h", md5));
 
         //[Obsolete]
         public async Task<BestPerformance[]> GetBestPerformancesAsync(int uid, Mode mode, int limit = 10)
@@ -128,9 +140,11 @@ namespace Bleatingsheep.OsuMixedApi
             var filter = result.Where(u => string.Equals(u.Name, username, StringComparison.OrdinalIgnoreCase));
             return (true, filter.SingleOrDefault());
         }
+
         #endregion
 
         #region Urls
+
         public string ThumbOf(int setId) => $"https://b.ppy.sh/thumb/{setId}l.jpg";
 
         public string PreviewAudioOf(int setId) => $"https://b.ppy.sh/preview/{setId}.mp3";
@@ -138,9 +152,11 @@ namespace Bleatingsheep.OsuMixedApi
         public string PageOfSet(int setId) => $"https://osu.ppy.sh/beatmapsets/{setId}";
 
         public string PageOfSetOld(int setId) => $"https://osu.ppy.sh/s/{setId}";
+
         #endregion
 
         #region Utils
+
         private readonly ThreadSafeRandom _threadSafeRandom = new ThreadSafeRandom();
 
         private async Task<T[]> SafeGetArrayAsync<T>(string url, params (string key, string value)[] ps)
@@ -171,11 +187,11 @@ namespace Bleatingsheep.OsuMixedApi
         private async Task<BestPerformance[]> GetBestPerformancesAsync(string u, string type, Osu.Mode m, int limit)
         {
             var result = await SafeGetArrayAsync<BestPerformance>(BestPerformanceUrl,
-               ("k", apiKey),
-               ("u", u),
-               ("m", ((int)m).ToString()),
-               ("limit", limit.ToString()),
-               ("type", type));
+                ("k", apiKey),
+                ("u", u),
+                ("m", ((int)m).ToString()),
+                ("limit", limit.ToString()),
+                ("type", type));
             if (result != null)
                 Array.ForEach(result, bp => bp.Mode = (Mode)m);
             return result;
@@ -193,6 +209,7 @@ namespace Bleatingsheep.OsuMixedApi
                 Array.ForEach(result, user => user.Mode = (Mode)m);
             return result;
         }
+
         #endregion
     }
 }
